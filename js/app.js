@@ -21,6 +21,22 @@ class HTML {
 
     }
 
+    // print all message for user in html
+    printMessage(message, className){
+
+        const div = document.createElement('div')
+        div.classList.add('alert', 'text-center', className)
+        div.appendChild(document.createTextNode(message))
+        const primary = document.querySelector('.primary')
+        primary.insertBefore(div, addExpenseForm)
+
+        setTimeout(() => {
+            document.querySelector('.alert').remove()
+        }, 2000);
+
+        addExpenseForm.reset()
+    }
+
 
 }
 
@@ -99,8 +115,12 @@ function eventlisteners() {
    const expense = document.querySelector('#expense').value
    const amount = document.querySelector('#amount').value
 
-        console.log(expense);
-        console.log(amount);
+        if (expense === '' || amount === '') {
+            html.printMessage('همه موارد الزامی است' , 'alert-danger')
+            
+        } else {
+            console.log('correct');
+        }
     })
 }
 
