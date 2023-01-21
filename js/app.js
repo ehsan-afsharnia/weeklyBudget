@@ -3,8 +3,15 @@
 class Budget {
     constructor(budget){
         this.budget = budget
+        this.budgetLeft = this.budget
     }
 
+
+    subtractFromBudget(amount){
+
+      return this.budgetLeft -= amount
+
+    }
 }
 
 
@@ -35,6 +42,29 @@ class HTML {
         }, 2000);
 
         addExpenseForm.reset()
+    }
+
+
+
+    // display expense to the list
+    insertExpense(name, amount){
+
+        const expenses = document.querySelector('#expenses ul')
+        let li = document.createElement('li')
+        li.className = 'list-group-item d-flex justify-content-between align-items-center'
+        li.innerHTML = `
+        ${name}
+       <span class ="badge badge-primary badge-pill">${amount}</span>
+        `
+        expenses.appendChild(li)
+    }
+
+
+    // subtract expense amount from budget
+    trackBudget(amount){
+
+       const budgetLeftTomans = budget.subtractFromBudget(amount)
+       budgetLeft.innerHTML = `${budgetLeftTomans}`
     }
 
 
@@ -99,12 +129,13 @@ function eventlisteners() {
             budget = new Budget(userBudget)
             console.log(budget);
             html.insertBudget(budget.budget)
+            
         }
     })
 
 
 
-    // get values from the foorm when submited
+    // get values from the form when submited
     
     addExpenseForm.addEventListener('submit', function(e) {
         
@@ -119,7 +150,8 @@ function eventlisteners() {
             html.printMessage('همه موارد الزامی است' , 'alert-danger')
             
         } else {
-            console.log('correct');
+            html.insertExpense(expense, amount)
+            html.trackBudget(amount)
         }
     })
 }
