@@ -65,6 +65,28 @@ class HTML {
 
        const budgetLeftTomans = budget.subtractFromBudget(amount)
        budgetLeft.innerHTML = `${budgetLeftTomans}`
+
+
+        
+        
+       if ((budget.budget / 4) > budgetLeftTomans) {
+
+        // if less than 25% budget left change color to the warning
+
+        budgetLeft.parentElement.parentElement.classList.remove('alert-success', 'alert-warning')
+        budgetLeft.parentElement.parentElement.classList.add('alert-danger')
+
+        
+       }
+       else if((budget.budget / 2) > budgetLeftTomans){
+        
+        // if less than 50% budget left change color to the warning
+
+        budgetLeft.parentElement.parentElement.classList.remove('alert-success')
+        budgetLeft.parentElement.parentElement.classList.add('alert-warning')
+
+
+       }
     }
 
 
